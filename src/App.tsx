@@ -1,11 +1,21 @@
-import { Box, Text } from "@chakra-ui/react";
-import "./App.css";
+import { Text } from "@chakra-ui/react";
+import { useState } from "react";
+import { TodoCard } from "./components/TodoCard";
 
 function App() {
+  const [testData] = useState([
+    {
+      name: "Test Todo",
+      id: "fjsl;fgjasl",
+    },
+  ]);
   return (
-    <Box>
+    <>
       <Text>Hello SimpleTodo</Text>
-    </Box>
+      {testData.map((data) => (
+        <TodoCard name={data.name} id={data.id} />
+      ))}
+    </>
   );
 }
 
