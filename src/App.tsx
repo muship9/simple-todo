@@ -1,12 +1,16 @@
-import { Flex, Heading, VStack } from "@chakra-ui/react";
+import { Flex, Heading, Text, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import { TodoCard } from "./components/TodoCard";
 
 function App() {
-  const [testData] = useState([
+  const [testData, setTodoData] = useState([
     {
-      name: "Test Todo",
-      id: "fjsl;fgjasl",
+      name: "First Todo",
+      id: "1",
+    },
+    {
+      name: "Second Todo",
+      id: "2",
     },
   ]);
   return (
@@ -15,10 +19,13 @@ function App() {
         <Heading size={"xl"} textAlign={"center"} mt={"5%"}>
           Hello SimpleTodo
         </Heading>
-        <Flex w={"100%"} h={"100%"} justifyContent={"center"}>
+        <Flex justifyContent={"center"} flexFlow={"column"}>
           {testData.map((data) => (
-            <TodoCard name={data.name} id={data.id} />
+            <TodoCard name={data.name} id={data.id} setTodoData={setTodoData} />
           ))}
+        </Flex>
+        <Flex w={"100%"} h={"100%"} justifyContent={"center"}>
+          <Text>add Todo</Text>
         </Flex>
       </VStack>
     </>
