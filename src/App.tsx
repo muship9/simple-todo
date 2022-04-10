@@ -1,4 +1,5 @@
-import { Flex, Heading, Text, VStack } from "@chakra-ui/react";
+import { AddIcon } from "@chakra-ui/icons";
+import { Flex, Heading, HStack, Text, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import { TodoCard } from "./components/TodoCard";
 
@@ -13,6 +14,7 @@ function App() {
       id: "2",
     },
   ]);
+
   return (
     <>
       <VStack spacing={5} h={"100vh"} w={"100vw"}>
@@ -24,8 +26,11 @@ function App() {
             <TodoCard name={data.name} id={data.id} setTodoData={setTodoData} />
           ))}
         </Flex>
-        <Flex w={"100%"} h={"100%"} justifyContent={"center"}>
-          <Text>add Todo</Text>
+        <Flex justifyContent={"center"}>
+          <HStack>
+            <AddIcon w={3} h={3} />
+            <Text>add Todo</Text>
+          </HStack>
         </Flex>
       </VStack>
     </>
