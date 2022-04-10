@@ -8,8 +8,8 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { useRef, useState } from "react";
 import { TodoCard } from "./components/TodoCard";
+import { useTodo } from "./hooks/useTodo";
 
 type TodoData = {
   name: string;
@@ -17,30 +17,14 @@ type TodoData = {
 };
 
 function App() {
-  const [toggleForm, setToggleForm] = useState(false);
-
-  const inputValue = useRef("");
-
-  // 一旦仮データを作成して動作を確認する
-  const [testData, setTodoData] = useState<TodoData[]>([
-    {
-      name: "First Todo",
-      id: 0,
-    },
-    {
-      name: "Second Todo",
-      id: 1,
-    },
-  ]);
-
-  const handleAddTodo = () => {
-    const makeTodoData: TodoData = {
-      name: inputValue.current,
-      id: testData.length + 1,
-    };
-    setTodoData((data) => [...data, makeTodoData]);
-    setToggleForm(false);
-  };
+  const {
+    testData,
+    setTodoData,
+    toggleForm,
+    setToggleForm,
+    inputValueRef,
+    handleAddTodo,
+  } = useTodo();
 
   return (
     <>
@@ -68,7 +52,7 @@ function App() {
                   placeholder="Todo Name"
                   size="md"
                   mt={"5px"}
-                  onChange={(e) => (inputValue.current = e.target.value)}
+                  onChange={(e) => (inputValueRef.current = e.target.value)}
                 />
                 <Button w={"40%"} onClick={handleAddTodo}>
                   Create
