@@ -1,18 +1,6 @@
-import {
-  Button,
-  Flex,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Text,
-  useDisclosure,
-  VStack,
-} from "@chakra-ui/react";
+import { Flex, Text, useDisclosure, VStack } from "@chakra-ui/react";
 import { VFC } from "react";
+import { BaseModal } from "./BaseModal";
 
 type Props = {
   name: string;
@@ -22,7 +10,7 @@ type Props = {
   >;
 };
 
-export const TodoCard: VFC<Props> = ({ name, id }: Props) => {
+export const TodoCard: VFC<Props> = ({ name, id, setTodoData }: Props) => {
   const { onOpen, isOpen, onClose } = useDisclosure();
   return (
     <>
@@ -41,24 +29,13 @@ export const TodoCard: VFC<Props> = ({ name, id }: Props) => {
           <Text>{id}</Text>
         </VStack>
       </Flex>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Edit Todo</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            {name}
-            {id}
-          </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Edit
-            </Button>
-            <Button variant="ghost">Close</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <BaseModal
+        isOpen={isOpen}
+        onClose={onClose}
+        name={name}
+        id={id}
+        setTodoData={setTodoData}
+      />
     </>
   );
 };
