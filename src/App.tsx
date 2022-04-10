@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Flex, Heading, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import { TodoCard } from "./components/TodoCard";
 
@@ -11,10 +11,16 @@ function App() {
   ]);
   return (
     <>
-      <Text>Hello SimpleTodo</Text>
-      {testData.map((data) => (
-        <TodoCard name={data.name} id={data.id} />
-      ))}
+      <VStack spacing={5} h={"100vh"} w={"100vw"}>
+        <Heading size={"xl"} textAlign={"center"} mt={"5%"}>
+          Hello SimpleTodo
+        </Heading>
+        <Flex w={"100%"} h={"100%"} justifyContent={"center"}>
+          {testData.map((data) => (
+            <TodoCard name={data.name} id={data.id} />
+          ))}
+        </Flex>
+      </VStack>
     </>
   );
 }
