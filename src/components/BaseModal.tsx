@@ -14,9 +14,9 @@ type Props = {
   isOpen: boolean;
   onClose: () => void;
   name: string;
-  id: string;
+  id: number;
   setTodoData: React.Dispatch<
-    React.SetStateAction<{ name: string; id: string }[]>
+    React.SetStateAction<{ name: string; id: number }[]>
   >;
 };
 

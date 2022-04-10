@@ -4,9 +4,9 @@ import { BaseModal } from "./BaseModal";
 
 type Props = {
   name: string;
-  id: string;
+  id: number;
   setTodoData: React.Dispatch<
-    React.SetStateAction<{ name: string; id: string }[]>
+    React.SetStateAction<{ name: string; id: number }[]>
   >;
 };
 
