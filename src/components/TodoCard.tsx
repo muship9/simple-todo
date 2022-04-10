@@ -9,7 +9,7 @@ type Props = {
 export const TodoCard: VFC<Props> = ({ name, id }: Props) => {
   return (
     <>
-      <Flex w={"300px"} h={"150px"} border={" 2px solid #a9a9a9"}>
+      <Flex w={"300px"} h={"150px"} border={"2px solid #a9a9a9"}>
         <VStack>
           <Text>{name}</Text>
           <Text>{id}</Text>
