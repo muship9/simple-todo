@@ -8,6 +8,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import { useRef } from "react";
 import { TodoCard } from "./components/TodoCard";
 import { useTodo } from "./hooks/useTodo";
 
@@ -19,12 +20,14 @@ type TodoData = {
 function App() {
   const {
     testData,
-    setTodoData,
     toggleForm,
     setToggleForm,
-    inputValueRef,
     handleAddTodo,
+    handleDeleteTodo,
+    handleUpdateTodo,
   } = useTodo();
+
+  const inputValueRef = useRef("");
 
   return (
     <>
@@ -34,7 +37,12 @@ function App() {
         </Heading>
         <Flex justifyContent={"center"} flexFlow={"column"}>
           {testData.map((data) => (
-            <TodoCard name={data.name} id={data.id} setTodoData={setTodoData} />
+            <TodoCard
+              name={data.name}
+              id={data.id}
+              handleDeleteTodo={handleDeleteTodo}
+              handleUpdateTodo={handleUpdateTodo}
+            />
           ))}
           <HStack
             onClick={() => setToggleForm(!toggleForm)}
@@ -54,7 +62,10 @@ function App() {
                   mt={"5px"}
                   onChange={(e) => (inputValueRef.current = e.target.value)}
                 />
-                <Button w={"40%"} onClick={handleAddTodo}>
+                <Button
+                  w={"40%"}
+                  onClick={() => handleAddTodo(inputValueRef.current)}
+                >
                   Create
                 </Button>
               </VStack>

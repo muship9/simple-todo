@@ -1,17 +1,17 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 
-type TodoData = {
+export type TodoData = {
   name: string;
   id: number;
 };
 
 export const useTodo = (): {
   testData: TodoData[];
-  setTodoData: React.Dispatch<React.SetStateAction<TodoData[]>>;
   toggleForm: boolean;
   setToggleForm: React.Dispatch<React.SetStateAction<boolean>>;
-  inputValueRef: React.MutableRefObject<string>;
-  handleAddTodo: () => void;
+  handleAddTodo: (newTodoName: string) => void;
+  handleDeleteTodo: (id: number) => void;
+  handleUpdateTodo: (changeTodoData: TodoData) => void;
 } => {
   // 一旦仮データを作成して動作を確認する
   const [testData, setTodoData] = useState<TodoData[]>([
@@ -25,22 +25,34 @@ export const useTodo = (): {
     },
   ]);
   const [toggleForm, setToggleForm] = useState(false);
-  const inputValueRef = useRef("");
 
-  const handleAddTodo = () => {
+  const handleAddTodo = (newTodoName: string) => {
     const makeTodoData: TodoData = {
-      name: inputValueRef.current,
+      name: newTodoName,
       id: testData.length + 1,
     };
     setTodoData((data) => [...data, makeTodoData]);
     setToggleForm(false);
   };
+
+  const handleDeleteTodo = (id: number) => {
+    setTodoData(testData.filter((data) => data.id !== id));
+  };
+
+  const handleUpdateTodo = (changeTodoData: TodoData) => {
+    setTodoData(
+      testData.map((data) =>
+        data.id === changeTodoData.id ? changeTodoData : data
+      )
+    );
+  };
+
   return {
     testData,
-    setTodoData,
     toggleForm,
     setToggleForm,
-    inputValueRef,
     handleAddTodo,
+    handleDeleteTodo,
+    handleUpdateTodo,
   };
 };

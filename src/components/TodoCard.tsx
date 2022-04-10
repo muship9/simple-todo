@@ -1,16 +1,21 @@
 import { Flex, Text, useDisclosure, VStack } from "@chakra-ui/react";
 import { VFC } from "react";
+import { TodoData } from "../hooks/useTodo";
 import { BaseModal } from "./BaseModal";
 
 type Props = {
   name: string;
   id: number;
-  setTodoData: React.Dispatch<
-    React.SetStateAction<{ name: string; id: number }[]>
-  >;
+  handleDeleteTodo: (id: number) => void;
+  handleUpdateTodo: (changeTodoData: TodoData) => void;
 };
 
-export const TodoCard: VFC<Props> = ({ name, id, setTodoData }: Props) => {
+export const TodoCard: VFC<Props> = ({
+  name,
+  id,
+  handleDeleteTodo,
+  handleUpdateTodo,
+}: Props) => {
   const { onOpen, isOpen, onClose } = useDisclosure();
   return (
     <>
@@ -34,7 +39,8 @@ export const TodoCard: VFC<Props> = ({ name, id, setTodoData }: Props) => {
         onClose={onClose}
         name={name}
         id={id}
-        setTodoData={setTodoData}
+        handleDeleteTodo={handleDeleteTodo}
+        handleUpdateTodo={handleUpdateTodo}
       />
     </>
   );
